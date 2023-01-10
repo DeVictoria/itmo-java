@@ -23,6 +23,10 @@ public class Const implements Exep{
     public String toString() {
         return String.valueOf(constanta);
     }
+    @Override
+    public String toMiniString() {
+        return String.valueOf(constanta);
+    }
 
 
     @Override

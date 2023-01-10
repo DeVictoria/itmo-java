@@ -27,6 +27,10 @@ public class Variable implements Exep {
     public String toString(){
         return String.valueOf(VariableName);
     }
+    @Override
+    public String toMiniString() {
+        return String.valueOf(VariableName);
+    }
 
     @Override
     public boolean equals(Object o) {
