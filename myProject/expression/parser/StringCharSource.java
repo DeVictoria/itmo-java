@@ -2,10 +2,13 @@ package expression.parser;
 
 public  class StringCharSource implements CharSource {
     private final String string;
+
+    private final int len;
     public int pos =0;
 
     public StringCharSource(String string) {
         this.string = string;
+        this.len = string.length();
     }
     @Override
     public boolean hasNext() {
@@ -18,7 +21,17 @@ public  class StringCharSource implements CharSource {
 
     @Override
     public char next() {
-        char result =string.charAt(pos);
+        if(pos<len) {
+            char result = string.charAt(pos);
+            pos++;
+            return result;
+        }else {
+            return '@';
+        }
+    }
+    @Override
+    public char end() {
+        char result ='@';
         pos++;
         return result;
     }
@@ -29,8 +42,13 @@ public  class StringCharSource implements CharSource {
 
     @Override
     public char back() {
-        pos--;
-        return string.charAt(pos);
+        if(pos<=len) {
+            pos--;
+            return string.charAt(pos);
+        }else {
+            pos--;
+            return '@';
+        }
     }
 
     @Override

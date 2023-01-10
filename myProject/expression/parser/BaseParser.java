@@ -9,7 +9,7 @@ public class BaseParser {
     }
 
     protected char take() {
-        ch = source.hasNext() ? source.next() : END;
+        ch = source.hasNext() ? source.next() : source.end();
         return ch;
     }
 

@@ -1,6 +1,7 @@
 package expression.parser;
 
 public interface CharSource {
+    char end();
     void setPos(int ind);
 
     boolean canBack();

@@ -1,8 +1,12 @@
 package expression.parser;
 import expression.*;
 public class ExpressionParser extends BaseParser {
+    private int cou =0;
     public ExpressionParser(final CharSource source) {
         super(source);
+    }
+    public ExpressionParser(final String source) {
+        super(new StringCharSource(source));
     }
 
     private Exep parsExpression() {
@@ -17,10 +21,11 @@ public class ExpressionParser extends BaseParser {
     private Exep prior0() {
         Exep value = prior1();
         while (true) {
+            skipWhitespase();
             if (eof()) {
+                back();
                 return value;
             }
-            skipWhitespase();
             char next = take();
             switch (next) {
                 case 's' -> {
@@ -31,9 +36,15 @@ public class ExpressionParser extends BaseParser {
                     expect("lear");
                     value = new Clear(value, prior1());
                 }
-                case ')' -> {
-                    back();
-                    return value;
+                case')' -> {
+                    if(cou!=0) {
+                        back();
+                        return value;
+                    }
+                    else {
+                        System.out.println("WRONG");
+                        System.exit(0);
+                    }
                 }
                 default -> throw error("Unsupported input " + next);
             }
@@ -43,16 +54,26 @@ public class ExpressionParser extends BaseParser {
     private Exep prior1() {
         Exep value = prior2();
         while (true) {
+            skipWhitespase();
             if (eof()) {
                 back();
                 return value;
             }
-            skipWhitespase();
             char next = take();
             switch (next) {
                 case '+' -> value = new Add(value, prior2());
                 case '-' -> value = new Subtract(value, prior2());
-                case 's', 'c', ')' -> {
+                case')' -> {
+                    if(cou!=0) {
+                        back();
+                        return value;
+                    }
+                    else {
+                        System.out.println("WRONG");
+                        System.exit(0);
+                    }
+                }
+                case 's', 'c' -> {
                     back();
                     return value;
                 }
@@ -64,17 +85,28 @@ public class ExpressionParser extends BaseParser {
     private Exep prior2() {
         Exep value = prior3();
         while (true) {
-            if(!eof()) {
-                skipWhitespase();
-            }
-            char next = take();
+            skipWhitespase();
+            take();
             if (eof()) {
+                back();
                 return value;
             }
+            back();
+            char next = take();
             switch (next) {
                 case '*' -> value = new Multiply(value, prior3());
                 case '/' -> value = new Divide(value, prior3());
-                case 's', 'c', ')', '+', '-' -> {
+                case')' -> {
+                    if(cou!=0) {
+                        back();
+                        return value;
+                    }
+                    else {
+                        System.out.println("WRONG");
+                        System.exit(0);
+                    }
+                }
+                case 's', 'c', '+', '-' -> {
                     back();
                     return value;
                 }
@@ -88,11 +120,13 @@ public class ExpressionParser extends BaseParser {
         char next = take();
         switch (next) {
             case '(':
+                cou++;
                 Exep value = parsExpression();
                 char ch = take();
                 if (ch != ')') {
                     throw error("Unsupported input " + ch);
                 }
+                cou--;
                 return value;
             case 'x':
             case 'y':
@@ -130,12 +164,14 @@ public class ExpressionParser extends BaseParser {
                         next = take();
                     }
                     back();
-                    skipWhitespase();
                     return new Const(Integer.parseInt(String.valueOf(sb)));
                 } else {
                     throw error("Unsupported input " + next);
                 }
         }
+    }
+    public void toMiniString() {
+        System.out.println(parsExpression().toMiniString());
     }
 
 }
