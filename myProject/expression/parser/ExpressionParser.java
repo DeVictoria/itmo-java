@@ -22,11 +22,11 @@ public class ExpressionParser extends BaseParser {
         Exep value = prior1();
         while (true) {
             skipWhitespase();
+            char next = take();
             if (eof()) {
                 back();
                 return value;
             }
-            char next = take();
             switch (next) {
                 case 's' -> {
                     expect("et");
@@ -42,8 +42,7 @@ public class ExpressionParser extends BaseParser {
                         return value;
                     }
                     else {
-                        System.out.println("WRONG");
-                        System.exit(0);
+                        throw error("Unsupported input " + next);
                     }
                 }
                 default -> throw error("Unsupported input " + next);
@@ -55,11 +54,11 @@ public class ExpressionParser extends BaseParser {
         Exep value = prior2();
         while (true) {
             skipWhitespase();
+            char next = take();
             if (eof()) {
                 back();
                 return value;
             }
-            char next = take();
             switch (next) {
                 case '+' -> value = new Add(value, prior2());
                 case '-' -> value = new Subtract(value, prior2());
@@ -69,8 +68,7 @@ public class ExpressionParser extends BaseParser {
                         return value;
                     }
                     else {
-                        System.out.println("WRONG");
-                        System.exit(0);
+                        throw error("Unsupported input " + next);
                     }
                 }
                 case 's', 'c' -> {
@@ -86,13 +84,11 @@ public class ExpressionParser extends BaseParser {
         Exep value = prior3();
         while (true) {
             skipWhitespase();
-            take();
+            char next = take();
             if (eof()) {
                 back();
                 return value;
             }
-            back();
-            char next = take();
             switch (next) {
                 case '*' -> value = new Multiply(value, prior3());
                 case '/' -> value = new Divide(value, prior3());
@@ -102,8 +98,7 @@ public class ExpressionParser extends BaseParser {
                         return value;
                     }
                     else {
-                        System.out.println("WRONG");
-                        System.exit(0);
+                        throw error("Unsupported input " + next);
                     }
                 }
                 case 's', 'c', '+', '-' -> {
