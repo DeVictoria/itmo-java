@@ -12,14 +12,23 @@ public class BaseParser {
         ch = source.hasNext() ? source.next() : END;
         return ch;
     }
+
     protected void setPos(int ind) {
         source.setPos(ind);
-        if (ind>0) {
+        if (ind > 0) {
             ch = take();
             source.back();
-        }
-        else {
+        } else {
             ch = 0xffff;
+        }
+    }
+    protected void skipWhitespase() {
+        char space = take();
+        while (Character.isWhitespace(space)) {
+            space = take();
+        }
+        if(!eof()) {
+            back();
         }
     }
 
@@ -32,7 +41,7 @@ public class BaseParser {
         if (test(expected)) {
             return true;
         }
-        if (source.canBack()){
+        if (source.canBack()) {
             back();
         }
         return false;
@@ -64,7 +73,7 @@ public class BaseParser {
     }
 
     protected void back() {
-        source.back();
+        ch = source.back();
     }
 
 }

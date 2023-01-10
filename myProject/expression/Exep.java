@@ -1,6 +1,6 @@
 package expression;
 
-public interface Exep extends Expression, ToMiniString, TripleExpression{
+public interface Exep {
     int evaluate(int x);
     int evaluate(int x, int y, int z);
     String toString();
@@ -9,5 +9,6 @@ public interface Exep extends Expression, ToMiniString, TripleExpression{
 
     int priority();
     boolean needBrackets();
+    public String toMiniString();
 
 }

@@ -1,6 +1,6 @@
 package expression.parser;
 
-public class StringCharSource implements CharSource {
+public  class StringCharSource implements CharSource {
     private final String string;
     public int pos =0;
 
@@ -28,8 +28,9 @@ public class StringCharSource implements CharSource {
     }
 
     @Override
-    public void back() {
+    public char back() {
         pos--;
+        return string.charAt(pos);
     }
 
     @Override
