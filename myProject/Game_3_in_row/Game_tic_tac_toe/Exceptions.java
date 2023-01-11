@@ -1,4 +1,4 @@
-package Game;
+package Game_3_in_row.Game_tic_tac_toe;
 
 public class Exceptions {
     public static void getException(Move move, int length, int height){

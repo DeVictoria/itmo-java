@@ -1,7 +1,7 @@
-package Game;
+package Game_3_in_row.Game_tic_tac_toe;
 
 public class Game {
-    private  Player player1;
+    private Player player1;
     private final Player player2;
     int result2 =-1;
     int result1 =-1;
@@ -34,7 +34,7 @@ public class Game {
             }
         }
     }
-    public int makeMove(TicTacToeBoard board, Player player,int no){
+    public int makeMove(TicTacToeBoard board, Player player, int no){
         Move move=player.move(board.getPosition());
         Result result = board.makeMove(move);
         System.out.printf("\nPlayer #"+player.getNumber()+", move: (%d, %d, %s)%n", move.getRow()+1, move.getCol()+1, move.getCell());

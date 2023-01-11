@@ -1,4 +1,4 @@
-package Game;
+package Game_tic_tac_toe;
 
 public interface Player {
     Move move (Position position);

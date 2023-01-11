@@ -1,26 +1,25 @@
-package Game;
-public class CheatingPlayer implements Player {
+package Game_3_in_row.Game_tic_tac_toe;
+
+
+public class SequencePlayer implements Player {
     private final int Number;
     private int winStatus =0;
 
-    public CheatingPlayer(int Number){
+    public SequencePlayer(int Number){
         this.Number = Number;
     }
+
     @Override
     public Move move(Position position) {
-        final TicTacToeBoard board = (TicTacToeBoard) position;
-        for (int r = 0; r < 3; r++) {
-            for (int c = 0; c < 3; c++) {
-                if (r + c == 0) {
-                    continue;
-                }
+        for(int r=0; r<position.getHeight(); r++){
+            for(int c=0; c<position.getLength(); c++) {
                 final Move move = new Move(r, c, position.getTurn());
                 if (position.isValid(move)) {
-                    board.makeMove(move);
+                    return move;
                 }
             }
         }
-        return new Move(0, 0, position.getTurn());
+        throw new AssertionError("No valid moves");
     }
 
     @Override
