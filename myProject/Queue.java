@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Queue<O> {
-    int size;
-    int head = 0;
-    int tail = 0;
-    ArrayList<O> queue;
+    private int size;
+    private int head = 0;
+    private int tail = 0;
+    private ArrayList<O> queue;
 
     public Queue(int size) {
         this.size = size;
@@ -21,10 +21,11 @@ public class Queue<O> {
         head++;
     }
 
-    public void pop() {
+    public O pop() {
         head--;
         O ans = queue.get(head);
         queue.remove(head);
+        return ans;
     }
 
     public int size() {
