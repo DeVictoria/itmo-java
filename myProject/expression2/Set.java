@@ -1,10 +1,10 @@
-package expression;
+package expression2;
 
 
 import static java.lang.Math.pow;
 
 //делить
-public class Set extends Operation {
+public class Set extends Operation{
     public Set(Exep metod1, Exep metod2){
         super(metod1, metod2, "set");
     }

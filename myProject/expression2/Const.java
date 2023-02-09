@@ -1,4 +1,4 @@
-package expression;
+package expression2;
 
 import java.util.Objects;
 
@@ -21,6 +21,10 @@ public class Const implements Exep{
 
     @Override
     public String toString() {
+        return String.valueOf(constanta);
+    }
+    @Override
+    public String toMiniString() {
         return String.valueOf(constanta);
     }
 

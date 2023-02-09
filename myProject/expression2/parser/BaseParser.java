@@ -1,7 +1,6 @@
-package expression.parser;
-
+package expression2.parser;
 public class BaseParser {
-    private static final char END = '\0';
+    private static final char END = '@';
     private final CharSource source;
     private char ch = 0xffff;
 

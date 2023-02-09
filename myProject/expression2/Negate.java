@@ -1,6 +1,4 @@
-package expression;
-
-
+package expression2;
 
 import java.util.Objects;
 
@@ -13,12 +11,12 @@ public class Negate implements Exep{
 
 
     @Override
-    public int evaluate(int x) throws ExceptionExpression {
+    public int evaluate(int x) {
         return -metod.evaluate(x);
     }
 
     @Override
-    public int evaluate(int x, int y, int z) throws ExceptionExpression {
+    public int evaluate(int x, int y, int z) {
         return  -metod.evaluate(x, y, z);
     }
 

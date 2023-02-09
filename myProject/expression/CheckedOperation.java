@@ -1,16 +1,13 @@
 package expression;
 
-
-
-
 import java.util.Objects;
 
-public abstract class Operation implements Exep {
+public abstract class CheckedOperation implements Exep {
     Exep metod1;
     Exep metod2;
     String tag;
 
-    public Operation(Exep metod1, Exep metod2, String tag) {
+    public CheckedOperation(Exep metod1, Exep metod2, String tag) {
         this.metod1 = metod1;
         this.metod2 = metod2;
         this.tag = tag;
@@ -44,14 +41,14 @@ public abstract class Operation implements Exep {
         return doOperation(metod1.evaluate(x, y, z), metod2.evaluate(x, y, z));
     }
 
-    public int doOperation(int x, int y) {
+    public int doOperation(int x, int y) throws ExceptionExpression {
         return 0;
     }
 
     @Override
     public boolean equals(Object metod) {
         if (this == metod) return true;
-        if (!(metod instanceof Operation operation)) return false;
+        if (!(metod instanceof CheckedOperation operation)) return false;
         return metod1.equals(operation.metod1) && metod2.equals(operation.metod2) && tag.equals(operation.tag);
     }
 

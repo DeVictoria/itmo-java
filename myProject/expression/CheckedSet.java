@@ -4,8 +4,8 @@ package expression;
 import static java.lang.Math.pow;
 
 //делить
-public class Set extends Operation {
-    public Set(Exep metod1, Exep metod2){
+public class CheckedSet extends CheckedOperation {
+    public CheckedSet(Exep metod1, Exep metod2){
         super(metod1, metod2, "set");
     }
     @Override

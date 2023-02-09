@@ -1,25 +1,30 @@
 package expression;
 
-
-
 import java.util.Objects;
 
-public class Negate implements Exep{
+public class CheckedNegate implements Exep {
     Exep metod;
 
-    public Negate(Exep metod) {
+    public CheckedNegate(Exep metod) {
         this.metod = metod;
     }
 
 
     @Override
     public int evaluate(int x) throws ExceptionExpression {
-        return -metod.evaluate(x);
+        return doOperation(metod.evaluate(x));
     }
 
     @Override
     public int evaluate(int x, int y, int z) throws ExceptionExpression {
-        return  -metod.evaluate(x, y, z);
+        return doOperation(metod.evaluate(x, y, z));
+    }
+
+    private int doOperation(int x) throws OverflowException {
+        if (x==Integer.MIN_VALUE) {
+            throw new OverflowException("overflow");
+        }
+        return  -x;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class Negate implements Exep{
     }
     @Override
     public String toMiniString() {
-        if(metod.getClass()== Const.class || metod.getClass()== Variable.class || metod.getClass()== Negate.class){
+        if(metod.getClass()== Const.class || metod.getClass()== Variable.class || metod.getClass()== CheckedNegate.class){
             return "- " + metod.toMiniString();
         }
         else {
@@ -40,7 +45,7 @@ public class Negate implements Exep{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Negate negative)) return false;
+        if (!(o instanceof CheckedNegate negative)) return false;
         return Objects.equals(metod, negative.metod);
     }
 

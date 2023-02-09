@@ -1,4 +1,4 @@
-package expression;
+package expression2;
 
 import java.util.Objects;
 
@@ -25,6 +25,10 @@ public class Variable implements Exep {
 
     @Override
     public String toString(){
+        return String.valueOf(VariableName);
+    }
+    @Override
+    public String toMiniString() {
         return String.valueOf(VariableName);
     }
 

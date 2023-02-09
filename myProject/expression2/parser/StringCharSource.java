@@ -1,4 +1,4 @@
-package expression.parser;
+package expression2.parser;
 
 public  class StringCharSource implements CharSource {
     private final String string;
@@ -26,12 +26,12 @@ public  class StringCharSource implements CharSource {
             pos++;
             return result;
         }else {
-            return '\0';
+            return '@';
         }
     }
     @Override
     public char end() {
-        char result ='\0';
+        char result ='@';
         pos++;
         return result;
     }
@@ -47,7 +47,7 @@ public  class StringCharSource implements CharSource {
             return string.charAt(pos);
         }else {
             pos--;
-            return '\0';
+            return '@';
         }
     }
 

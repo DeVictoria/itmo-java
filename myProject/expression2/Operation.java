@@ -1,6 +1,4 @@
-package expression;
-
-
+package expression2;
 
 
 import java.util.Objects;
@@ -40,7 +38,7 @@ public abstract class Operation implements Exep {
     }
 
     @Override
-    public int evaluate(int x, int y, int z) throws ExceptionExpression {
+    public int evaluate(int x, int y, int z) {
         return doOperation(metod1.evaluate(x, y, z), metod2.evaluate(x, y, z));
     }
 
@@ -60,7 +58,7 @@ public abstract class Operation implements Exep {
         return Objects.hash(metod1, metod2, tag);
     }
 
-    public int evaluate(int result) throws ExceptionExpression {
+    public int evaluate(int result) {
         return doOperation(metod1.evaluate(result), metod2.evaluate(result));
     }
 }
